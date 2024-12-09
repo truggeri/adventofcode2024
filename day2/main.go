@@ -20,8 +20,12 @@ func main() {
 1 3 2 4 5
 8 6 4 4 1
 1 3 6 7 9`
-	solution := solve(parseInput(input))
+	solution := Solve(input)
 	fmt.Println("Solution:", solution)
+}
+
+func Solve(input string) uint {
+	return solve(parseInput(input))
 }
 
 func parseInput(input string) []report {
