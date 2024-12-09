@@ -22,8 +22,11 @@ func (m mul) Eval() uint {
 
 func main() {
 	input := "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
-	solution := accumulate(parseInput(input))
-	fmt.Println("Solution:", solution)
+	fmt.Println("Solution:", Solve(input))
+}
+
+func Solve(input string) uint {
+	return accumulate(parseInput(input))
 }
 
 func parseInput(input string) []mul {

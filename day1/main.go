@@ -6,10 +6,10 @@ import (
 )
 
 func main() {
-	fmt.Println(solve([]uint{3, 4, 2, 1, 3, 3}, []uint{4, 3, 5, 3, 9, 3}))
+	fmt.Println(Solve([]uint{3, 4, 2, 1, 3, 3}, []uint{4, 3, 5, 3, 9, 3}))
 }
 
-func solve(a, b []uint) uint {
+func Solve(a, b []uint) uint {
 	slices.Sort(a)
 	slices.Sort(b)
 	var sum uint = 0
