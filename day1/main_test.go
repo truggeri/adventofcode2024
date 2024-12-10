@@ -5,9 +5,13 @@ import (
 )
 
 func TestSample(t *testing.T) {
-	a := []uint{3, 4, 2, 1, 3, 3}
-	b := []uint{4, 3, 5, 3, 9, 3}
-	result := Solve(a, b)
+	input := `3   4
+4   3
+2   5
+1   3
+3   9
+3   3`
+	result := Solve(input)
 	if result != 11 {
 		t.Errorf("Calculated solution was not expected")
 	}
