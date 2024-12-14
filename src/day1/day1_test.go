@@ -1,13 +1,18 @@
-package main
+package day1
 
 import (
 	"testing"
 )
 
 func TestSample(t *testing.T) {
-	input := "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
+	input := `3   4
+4   3
+2   5
+1   3
+3   9
+3   3`
 	result := Solve(input)
-	if result != 161 {
+	if result != 11 {
 		t.Errorf("Calculated solution was not expected")
 	}
 }
