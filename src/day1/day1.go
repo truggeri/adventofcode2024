@@ -1,7 +1,6 @@
-package main
+package day1
 
 import (
-	"fmt"
 	"slices"
 	"strconv"
 	"strings"
@@ -9,16 +8,6 @@ import (
 
 // This is a bit fragile, but the spec doesn't indicate it will ever change
 const INPUT_SEPARATOR = "   "
-
-func main() {
-	input := `3   4
-4   3
-2   5
-1   3
-3   9
-3   3`
-	fmt.Println(solve(parseInput(input)))
-}
 
 func Solve(input string) uint {
 	return solve(parseInput(input))

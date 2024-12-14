@@ -1,7 +1,6 @@
-package main
+package day2
 
 import (
-	"fmt"
 	"slices"
 	"strconv"
 	"strings"
@@ -12,17 +11,6 @@ const DELTA_MIN = 1
 
 type level uint
 type report []level
-
-func main() {
-	input := `7 6 4 2 1
-1 2 7 8 9
-9 7 6 2 1
-1 3 2 4 5
-8 6 4 4 1
-1 3 6 7 9`
-	solution := Solve(input)
-	fmt.Println("Solution:", solution)
-}
 
 func Solve(input string) uint {
 	return solve(parseInput(input))

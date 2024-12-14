@@ -1,7 +1,6 @@
-package main
+package day4
 
 import (
-	"fmt"
 	"slices"
 	"strings"
 	"unicode/utf8"
@@ -10,20 +9,6 @@ import (
 const WORD_TO_FIND = "XMAS"
 
 var _rows []string
-
-func main() {
-	input := `MMMSXXMASM
-MSAMXMSMSA
-AMXSXMAAMM
-MSAMASMSMX
-XMASAMXAMM
-XXAMMXXAMA
-SMSMSASXSS
-SAXAMASAAA
-MAMMMXMMMM
-MXMXAXMASX`
-	fmt.Println("Solution:", Solve(input))
-}
 
 func Solve(input string) uint {
 	_rows = make([]string, 0)
