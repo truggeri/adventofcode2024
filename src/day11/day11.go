@@ -84,51 +84,16 @@ func zeroTrim(input stone) stone {
 
 // @see{https://en.wikipedia.org/wiki/Multiplication_algorithm#Example}
 func multiply(input stone) stone {
-	result := make(stone, 1)
-	partialProducts := make([][]uint, 0)
-
+	result := make(stone, len(input)+len(MULTIPLE))
 	var carry uint
 	for i := range input {
-		partialProducts = slices.Insert(partialProducts, i, make([]uint, 0))
 		carry = 0
-		multiplier := input[i]
-		for _, multiplicand := range MULTIPLE {
-			pp := multiplier*multiplicand + carry
-			partialProducts[i] = append(partialProducts[i], pp%10)
-			carry = pp / 10
+		for a := range MULTIPLE {
+			result[a+i] += carry + MULTIPLE[a]*input[i]
+			carry = result[a+i] / 10
+			result[a+i] = result[a+i] % 10
 		}
-		for {
-			if carry == 0 {
-				break
-			}
-			partialProducts[i] = append(partialProducts[i], carry%10)
-			carry = carry / 10
-		}
+		result[i+len(MULTIPLE)] = carry
 	}
-
-	for i, pp := range partialProducts {
-		carry = 0
-		for j, d := range pp {
-			product := d + carry
-			if len(result) > j+i {
-				product += result[j+i]
-			}
-			result = safeInsert(result, j+i, product%10)
-			carry = product / 10
-		}
-		if carry > 0 {
-			result = safeInsert(result, i+len(pp), carry)
-		}
-	}
-
 	return zeroTrim(result)
-}
-
-func safeInsert(s stone, i int, d uint) stone {
-	if len(s) <= i {
-		s = slices.Insert(s, i, d)
-	} else {
-		s[i] = d
-	}
-	return s
 }
