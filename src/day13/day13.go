@@ -70,24 +70,11 @@ func parse(input string) []machine {
 }
 
 func solveMachine(m machine) (bool, uint) {
-	if outOfRange(m) {
-		return false, 0
-	}
-
 	a, b := cramersRule([2][2]int{{m.buttonA.x, m.buttonB.x}, {m.buttonA.y, m.buttonB.y}}, [2][1]int{{m.prize.x}, {m.prize.y}})
 	if a == 0 && b == 0 {
 		return manualSolution(m)
 	}
-	positiveOnly := a > 0 && b >= 0 || a >= 0 && b > 0
-	return positiveOnly, uint(a*BUTTON_A_COST + b*BUTTON_B_COST)
-}
-
-func outOfRange(m machine) bool {
-	maxX := max(m.buttonA.x, m.buttonB.x)
-	cantReachX := maxX != 0 && m.prize.x/maxX > BUTTON_PUSH_LIMIT+1
-	maxY := max(m.buttonA.y, m.buttonB.y)
-	cantReachY := maxY != 0 && m.prize.y/maxY > BUTTON_PUSH_LIMIT+1
-	return cantReachX || cantReachY
+	return validSolution(m, a, b), uint(a*BUTTON_A_COST + b*BUTTON_B_COST)
 }
 
 // @see{https://en.wikipedia.org/wiki/Cramer's_rule#Explicit_formulas_for_small_systems}
@@ -106,6 +93,14 @@ func cramersRule(coef [2][2]int, column [2][1]int) (int, int) {
 // @see{https://en.wikipedia.org/wiki/Determinant}
 func determinate(input [2][2]int) int {
 	return input[0][0]*input[1][1] - input[0][1]*input[1][0]
+}
+
+func validSolution(m machine, a, b int) bool {
+	positiveOnly := (a > 0 && b >= 0) || (a >= 0 && b > 0)
+	withinLimits := a <= 100 && b <= 100
+	validAnswer := (a*m.buttonA.x+b*m.buttonB.x == m.prize.x) && (a*m.buttonA.y+b*m.buttonB.y == m.prize.y)
+
+	return positiveOnly && withinLimits && validAnswer
 }
 
 func manualSolution(m machine) (bool, uint) {
