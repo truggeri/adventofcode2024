@@ -13,6 +13,19 @@ func Solve(input string) uint {
 	return solve(parseInput(input))
 }
 
+func PartTwo(input string) uint {
+	left, right := parseInput(input)
+	occurances := make(map[uint]uint)
+	for _, r := range right {
+		occurances[r] += 1
+	}
+	var result uint = 0
+	for _, l := range left {
+		result += l * occurances[l]
+	}
+	return result
+}
+
 func parseInput(input string) ([]uint, []uint) {
 	var a, b []uint
 	for _, line := range strings.Split(input, "\n") {
@@ -22,9 +35,9 @@ func parseInput(input string) ([]uint, []uint) {
 		}
 
 		x, _ := strconv.Atoi(values[0])
-		a = slices.Concat(a, []uint{uint(x)})
+		a = append(a, uint(x))
 		y, _ := strconv.Atoi(values[1])
-		b = slices.Concat(b, []uint{uint(y)})
+		b = append(b, uint(y))
 	}
 	return a, b
 }
@@ -34,7 +47,7 @@ func solve(a, b []uint) uint {
 	slices.Sort(b)
 	var sum uint = 0
 	for i := range a {
-		sum = sum + absDiffUint(a[i], b[i])
+		sum += absDiffUint(a[i], b[i])
 	}
 	return sum
 }
