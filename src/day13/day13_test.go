@@ -95,3 +95,23 @@ Prize: X=0, Y=9`
 		t.Errorf("Calculated solution was not expected")
 	}
 }
+
+func TestStretchesTowardsMax(t *testing.T) {
+	input := `Button A: X+98, Y+61
+Button B: X+23, Y+50
+Prize: X=10248, Y=7378`
+	prizes, tokens := Solve(input)
+	if prizes != 1 || tokens != 322 {
+		t.Errorf("Calculated solution was not expected")
+	}
+}
+
+func TestDetNotWholeNumber(t *testing.T) {
+	input := `Button A: X+31, Y+54
+Button B: X+30, Y+14
+Prize: X=1879, Y=1440`
+	prizes, tokens := Solve(input)
+	if prizes != 0 || tokens != 0 {
+		t.Errorf("Calculated solution was not expected")
+	}
+}
