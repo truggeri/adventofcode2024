@@ -1,8 +1,6 @@
 package day17
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestSample(t *testing.T) {
 	input := `Register A: 729
@@ -25,3 +23,26 @@ Program: 2,4,1,2,7,5,1,7,4,4,0,3,5,5,3,0`
 		t.Errorf("Calculated solution was not expected")
 	}
 }
+
+func TestPart2Sample(t *testing.T) {
+	input := `Register A: 2024
+Register B: 0
+Register C: 0
+
+Program: 0,3,5,4,3,0`
+	if SolvePartTwo(input) != 117440 {
+		t.Errorf("Calculated solution was not expected")
+	}
+}
+
+// func TestPart2(t *testing.T) {
+// 	input := `Register A: 41644071
+// Register B: 0
+// Register C: 0
+
+// Program: 2,4,1,2,7,5,1,7,4,4,0,3,5,5,3,0`
+// 	fmt.Println(SolvePartTwo((input)))
+// 	// if SolvePartTwo(input) != 117440 {
+// 	// 	t.Errorf("Calculated solution was not expected")
+// 	// }
+// }
